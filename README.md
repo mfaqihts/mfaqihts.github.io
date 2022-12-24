@@ -1,1 +1,1 @@
-Static portofolio website hosted by github-pages. ![image]({https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white}) 
+Static portofolio website hosted by github-pages.
