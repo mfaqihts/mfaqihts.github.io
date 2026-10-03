@@ -4,14 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
     <link href="/dist/terminal.css" rel="stylesheet" />
     <title>Sabiq | Home</title>
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script src="/dist/terminal.js" defer></script>
   </head>
 
   <body>
@@ -30,12 +28,12 @@
         </nav>
 
         <!-- Hero -->
+        <div class="block" data-cmd="whoami">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$
           whoami
         </p>
-        <section class="hero">
-          <img src="./asset/images/profile.JPG" alt="Profile picture of Sabiq" />
+        <section class="hero out">
           <div>
             <h1>Hey there, I'm Sabiq</h1>
             <p>Senior Security Onshore Analyst @ Accenture</p>
@@ -50,8 +48,10 @@
             </div>
           </div>
         </section>
+        </div>
 
         <!-- Experience -->
+        <div class="block" data-cmd="experience">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$ cat
           experience.log
@@ -81,8 +81,10 @@
             <span class="title hl">Laboratory Assistant</span>
           </div>
         </section>
+        </div>
 
         <!-- Education -->
+        <div class="block" data-cmd="education">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$ cat
           education.txt
@@ -97,16 +99,12 @@
               <span class="hl">B.Eng in Electrical and Electronics Engineering</span>
               <span class="muted">· GPA 3.56/4.00</span>
             </p>
-            <ul class="log">
-              <li>
-                Thesis: Radar and Camera Fusion Using CenterFusion for Object
-                Detection in Autonomous Vehicles
-              </li>
-            </ul>
           </div>
         </section>
+        </div>
 
         <!-- Online Courses -->
+        <div class="block" data-cmd="courses">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$ ls
           courses/
@@ -114,39 +112,31 @@
         <section class="out">
           <div class="entry">
             <div class="entry-head">
-              <span
-                ><span class="name">Google Cloud Security Partner Bootcamp</span>
-                <span class="muted">· Google SecOps</span></span
-              >
+              <span class="name">Google Cloud Security Partner Bootcamp</span>
               <span class="date">2025-06</span>
             </div>
+            <span class="muted">Google SecOps</span>
           </div>
           <div class="entry">
             <div class="entry-head">
-              <span
-                ><span class="name">Studi DevSecOps</span>
-                <span class="muted">· DevSecOps &amp; DevOps Engineer</span></span
-              >
+              <span class="name">Studi DevSecOps</span>
               <span class="date">2023-11 → 2024-12</span>
             </div>
+            <span class="muted">DevSecOps &amp; DevOps Engineer</span>
           </div>
           <div class="entry">
             <div class="entry-head">
-              <span
-                ><span class="name">Digitalent Fresh Graduate Academy</span>
-                <span class="muted">· Dicoding Back-End Developer</span></span
-              >
+              <span class="name">Digitalent Fresh Graduate Academy</span>
               <span class="date">2022-03 → 2022-05</span>
             </div>
+            <span class="muted">Dicoding Back-End Developer</span>
           </div>
           <div class="entry">
             <div class="entry-head">
-              <span
-                ><span class="name">Bangkit Academy</span>
-                <span class="muted">· Machine Learning Cohort</span></span
-              >
+              <span class="name">Bangkit Academy</span>
               <span class="date">2021-02 → 2021-06</span>
             </div>
+            <span class="muted">Machine Learning Cohort</span>
             <ul class="log">
               <li>
                 Built the BISINDO Sign Language recognition app with a team
@@ -158,8 +148,10 @@
             </ul>
           </div>
         </section>
+        </div>
 
         <!-- Certifications -->
+        <div class="block" data-cmd="certs">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$ ls
           certs/
@@ -167,29 +159,31 @@
         <section class="out">
           <ul class="log">
             <li>
-              <span class="hl">Google Cloud Professional Security Operations Engineer</span>
+              <span>Google Cloud Professional Security Operations Engineer</span>
               <span class="muted">· 2025-12</span>
             </li>
             <li>
-              <span class="hl">Studi DevSecOps Certified Practical DevSecOps Engineer</span>
+              <span>Studi DevSecOps Certified Practical DevSecOps Engineer</span>
               <span class="muted">· 2024-12</span>
             </li>
             <li>
-              <span class="hl">Studi DevSecOps Certified Practical DevOps Engineer</span>
+              <span>Studi DevSecOps Certified Practical DevOps Engineer</span>
               <span class="muted">· 2024-04</span>
             </li>
             <li>
-              <span class="hl">Google Project Management Specialization</span>
+              <span>Google Project Management Specialization</span>
               <span class="muted">· 2023-01</span>
             </li>
             <li>
-              <span class="hl">IELTS Academic Band 7.0</span>
+              <span>IELTS Academic Band 7.0</span>
               <span class="muted">(CEFR C1) · 2022-12</span>
             </li>
           </ul>
         </section>
+        </div>
 
         <!-- Skills -->
+        <div class="block" data-cmd="skills">
         <p class="prompt">
           <span class="user">sabiq@sec</span>:<span class="path">~</span>$ cat
           skills.conf
@@ -202,12 +196,38 @@
           <span class="tag"><b>lang</b>=Python, SQL, Bash, KQL, JavaScript, C++</span>
           <span class="tag"><b>interests</b>=SecOps, DevSecOps, Automation</span>
         </section>
+        </div>
 
+        <!-- Contact -->
+        <div class="block" data-cmd="contact">
         <p class="prompt">
-          <span class="user">sabiq@sec</span>:<span class="path">~</span>$<span
-            class="cursor"
-          ></span>
+          <span class="user">sabiq@sec</span>:<span class="path">~</span>$ contact
         </p>
+        <section class="out">
+          <ul class="log">
+            <li>email&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:muhammad.ft.sabiq@gmail.com">muhammad.ft.sabiq@gmail.com</a></li>
+            <li>github&nbsp;&nbsp;&nbsp;<a href="https://github.com/mfaqihts">github.com/mfaqihts</a></li>
+            <li>linkedin&nbsp;<a href="https://www.linkedin.com/in/mfaqihts/">linkedin.com/in/mfaqihts</a></li>
+          </ul>
+        </section>
+        </div>
+
+        <!-- Interactive terminal (shown only when JavaScript runs) -->
+        <div id="output" aria-live="polite"></div>
+        <form id="cmdline" class="prompt cmdline" autocomplete="off">
+          <label for="cmd"
+            ><span class="user">sabiq@sec</span>:<span class="path">~</span>$</label
+          >
+          <input
+            id="cmd"
+            type="text"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+            aria-label="Type a command, for example help"
+          />
+          <span class="cursor" aria-hidden="true"></span>
+        </form>
       </main>
     </div>
   </body>

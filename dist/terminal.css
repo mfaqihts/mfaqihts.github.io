@@ -1,16 +1,24 @@
 :root {
   color-scheme: dark;
-  --bg: #050805;
-  --panel: #0b110c;
-  --bar: #141c15;
-  --border: #1f3324;
-  --text: #b8f5c8;
-  --muted: #6f9a7a;
-  --green: #39ff7a;
-  --amber: #ffcc66;
-  --cyan: #5fd7ff;
-  --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+  --bg: #16181c;
+  --panel: #1e2127;
+  --bar: #2a2e36;
+  --border: #353b45;
+  --text: #d7dae0;
+  --muted: #8b929e;
+  --green: #98c379;
+  --amber: #e5c07b;
+  --cyan: #61afef;
+  --font: "SF Mono", ui-monospace, Menlo, Monaco, "Cascadia Mono", Consolas,
+    "Liberation Mono", monospace;
+
+  /* Spacing scale: every gap on the page uses one of these. */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
 }
 
 * {
@@ -23,22 +31,14 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-body::after {
-  /* faint CRT scanlines */
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.18) 3px
-  );
+h1,
+p,
+ul {
+  margin: 0;
 }
 
 a {
@@ -46,9 +46,13 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover,
+a:focus-visible,
+.cmd-link:hover,
+.cmd-link:focus-visible {
   color: var(--bg);
   background: var(--cyan);
+  outline: none;
 }
 
 ::selection {
@@ -56,25 +60,35 @@ a:hover {
   color: var(--bg);
 }
 
-/* Window */
+.muted {
+  color: var(--muted);
+}
+
+.hl {
+  color: var(--amber);
+}
+
+/* ---------- Window ---------- */
+
 .window {
   max-width: 820px;
-  margin: 32px auto;
+  margin: var(--s6) auto;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: 0 0 40px rgba(57, 255, 122, 0.08);
+  border-radius: var(--s2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   overflow: hidden;
 }
 
 .titlebar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: var(--s2);
+  padding: var(--s3) var(--s4);
   background: var(--bar);
   border-bottom: 1px solid var(--border);
   font-size: 13px;
+  line-height: 1;
   color: var(--muted);
 }
 
@@ -96,20 +110,21 @@ a:hover {
 .titlebar .title {
   flex: 1;
   text-align: center;
+  /* width of the three dots, so the title is truly centred */
   margin-right: 52px;
 }
 
 .screen {
-  padding: 20px 24px 32px;
+  padding: var(--s4) var(--s5) var(--s6);
 }
 
-/* Nav */
+/* ---------- Nav ---------- */
+
 nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  padding-bottom: 12px;
-  margin-bottom: 8px;
+  gap: var(--s4);
+  padding-bottom: var(--s3);
   border-bottom: 1px dashed var(--border);
 }
 
@@ -129,21 +144,11 @@ nav a.active {
   color: var(--green);
 }
 
-nav a.resume {
-  margin-left: auto;
-  color: var(--amber);
-}
+/* ---------- Prompt lines ---------- */
 
-nav a.resume:hover {
-  background: var(--amber);
-  color: var(--bg);
-}
-
-/* Prompt lines */
 .prompt {
-  margin: 28px 0 10px;
+  margin: var(--s5) 0 var(--s2);
   font-weight: 700;
-  color: var(--text);
 }
 
 .prompt .user {
@@ -156,11 +161,12 @@ nav a.resume:hover {
 
 .cursor {
   display: inline-block;
-  width: 0.6em;
+  width: 0.55em;
   height: 1.1em;
-  margin-left: 4px;
+  margin-left: var(--s1);
   vertical-align: text-bottom;
   background: var(--green);
+  opacity: 0.8;
   animation: blink 1s steps(1) infinite;
 }
 
@@ -170,67 +176,27 @@ nav a.resume:hover {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cursor {
-    animation: none;
-  }
-}
+/* ---------- Output blocks ---------- */
 
-/* Hero */
-.hero {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.hero img {
-  width: 132px;
-  height: 132px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
-  filter: grayscale(100%) sepia(40%) hue-rotate(70deg) saturate(250%)
-    brightness(0.9);
-}
-
-.hero h1 {
-  margin: 0 0 4px;
-  font-size: 30px;
-  color: var(--green);
-  text-shadow: 0 0 12px rgba(57, 255, 122, 0.45);
-}
-
-.hero p {
-  margin: 0;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.hl {
-  color: var(--amber);
-}
-
-/* Output blocks */
+/* Command output: indented with a guide line, items spaced evenly. */
 .out {
-  padding-left: 16px;
+  padding-left: var(--s4);
   border-left: 1px solid var(--border);
 }
 
-.out p {
-  margin: 6px 0;
+.out > * + * {
+  margin-top: var(--s2);
 }
 
-.entry {
-  margin: 0 0 18px;
+.out > .entry + .entry {
+  margin-top: var(--s4);
 }
 
 .entry-head {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 4px 16px;
+  column-gap: var(--s4);
 }
 
 .entry-head .name {
@@ -242,50 +208,61 @@ nav a.resume:hover {
   color: var(--muted);
 }
 
-.role {
-  margin: 10px 0 0;
-}
-
-.role .title {
-  color: var(--amber);
+.entry > p,
+.entry > ul {
+  margin-top: var(--s1);
 }
 
 ul.log {
   list-style: none;
-  margin: 4px 0 0;
   padding: 0;
 }
 
 ul.log li {
   position: relative;
-  padding-left: 20px;
-  margin: 2px 0;
+  padding-left: 2ch;
+}
+
+ul.log li + li {
+  margin-top: var(--s1);
 }
 
 ul.log li::before {
   content: ">";
   position: absolute;
-  left: 4px;
+  left: 0;
+  color: var(--green);
+}
+
+/* ---------- whoami ---------- */
+
+.hero h1 {
+  font-size: 16px;
   color: var(--green);
 }
 
 .contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
-  margin-top: 10px;
+  gap: var(--s1) var(--s4);
+  margin-top: var(--s2);
 }
+
+/* ---------- Skills ---------- */
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--s2);
+}
+
+.out.tags > * + * {
+  margin-top: 0;
 }
 
 .tag {
-  padding: 2px 8px;
+  padding: 2px var(--s2);
   border: 1px solid var(--border);
-  color: var(--text);
 }
 
 .tag b {
@@ -293,10 +270,161 @@ ul.log li::before {
   font-weight: 400;
 }
 
-footer {
-  margin-top: 36px;
-  color: var(--muted);
+/* ---------- About ---------- */
+
+/* Compact header (photo + name), then the bio at full width. */
+.out.about > * + * {
+  margin-top: var(--s4);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+
+.profile h1 {
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--green);
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.bio > * + * {
+  margin-top: var(--s2);
+}
+
+/* ---------- Interactive terminal ---------- */
+
+.cmdline {
+  display: none;
+}
+
+.js .block {
+  display: none;
+}
+
+.js .cmdline {
+  display: flex;
+  align-items: center;
+}
+
+.cmdline label {
+  margin-right: 1ch;
+}
+
+.cmdline .cursor {
+  flex-shrink: 0;
+  margin-left: 0;
+}
+
+html:not(.js) .block[data-cmd="contact"] {
+  display: none;
+}
+
+/* The input grows with its text and a blinking block cursor follows it. */
+.cmdline input {
+  width: 0;
+  max-width: calc(100% - 20ch);
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  caret-color: transparent;
+}
+
+.out.pre p {
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.out.warn p {
+  color: var(--amber);
+}
+
+.cmd-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cyan);
+  font: inherit;
+  cursor: pointer;
+}
+
+ul.help {
+  list-style: none;
+  padding: 0;
+}
+
+ul.help li {
+  display: grid;
+  grid-template-columns: 14ch 1fr;
+  column-gap: var(--s4);
+}
+
+ul.help li + li {
+  margin-top: var(--s1);
+}
+
+ul.help .cmd-link {
+  justify-self: start;
+  text-align: left;
+}
+
+/* ---------- Welcome banner ---------- */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  margin-top: var(--s5);
+}
+
+.banner .hand {
+  flex-shrink: 0;
+  width: 25ch;
+  margin: 0;
+  font: inherit;
   font-size: 13px;
+  line-height: 1;
+  color: var(--amber);
+}
+
+.banner .greet {
+  margin-bottom: var(--s2);
+  font-size: 30px;
+  line-height: 1.25;
+  color: var(--green);
+}
+
+.banner .intro > * + * {
+  margin-top: var(--s1);
+}
+
+.banner .cmds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2ch;
+}
+
+
+/* ---------- Motion & small screens ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -308,23 +436,34 @@ footer {
   }
 
   .screen {
-    padding: 16px;
-  }
-
-  .hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .hero h1 {
-    font-size: 24px;
-  }
-
-  nav a.resume {
-    margin-left: 0;
+    padding: var(--s4) var(--s4) var(--s5);
   }
 
   .titlebar .title {
     margin-right: 0;
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s4);
+  }
+
+  .banner .greet {
+    font-size: 24px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  ul.help li {
+    grid-template-columns: 11ch 1fr;
+  }
+
+  /* stack name and date so every entry lines up the same way */
+  .entry-head {
+    flex-direction: column;
   }
 }
